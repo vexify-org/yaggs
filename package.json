@@ -1,0 +1,21 @@
+{
+    "name": "@vexify-org/yaggs",
+    "version": "7.1.0",
+    "description": "A powerful CLI argument parser, better than yargs. Features: Deprecation Warnings, Subcommand Aliases, Extended Type Validators, Default Value Merge, Conflict Detection, Exclusive Groups, Interactive Prompts",
+    "main": "index.js",
+    "scripts": {
+        "test": "node test/index.js",
+        "test:verbose": "node test/index.js --verbose"
+    },
+    "keywords": ["cli", "argv", "parser", "arguments", "yargs", "commander", "deprecation", "aliases", "validation"],
+    "author": "Vexify",
+    "license": "Apache-2.0",
+    "files": [
+        "index.js",
+        "lib/",
+        "LICENSE"
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
+}
