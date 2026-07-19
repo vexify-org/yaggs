@@ -1,21 +1,42 @@
 {
-    "name": "@vexify-org/yaggs",
-    "version": "7.1.0",
-    "description": "A powerful CLI argument parser, better than yargs. Features: Deprecation Warnings, Subcommand Aliases, Extended Type Validators, Default Value Merge, Conflict Detection, Exclusive Groups, Interactive Prompts",
+    "name": "tsdk-cli",
+    "version": "5.2.0",
+    "description": "TypeScript Development Kit - Run TypeScript directly in Node.js. Features: Watch Mode, REPL, Project Init, Bundle, Config File Support, Debugger, Code Formatting, Test Runner, Project Templates",
     "main": "index.js",
-    "scripts": {
-        "test": "node test/index.js",
-        "test:verbose": "node test/index.js --verbose"
+    "bin": {
+        "tsdk-cli": "bin/tsdk.js",
+        "tsdk": "bin/tsdk.js"
     },
-    "keywords": ["cli", "argv", "parser", "arguments", "yargs", "commander", "deprecation", "aliases", "validation"],
+    "scripts": {
+        "test": "node test/index.js"
+    },
+    "keywords": [
+        "typescript",
+        "node",
+        "cli",
+        "runtime",
+        "ts-node",
+        "esbuild",
+        "watch",
+        "repl",
+        "bundle",
+        "debug",
+        "format",
+        "test",
+        "template"
+    ],
     "author": "Vexify",
     "license": "Apache-2.0",
     "files": [
         "index.js",
-        "lib/",
+        "bin/",
+        "README.md",
         "LICENSE"
     ],
-    "publishConfig": {
-        "access": "public"
+    "dependencies": {
+        "esbuild": "^0.21.0",
+        "chokidar": "^3.6.0",
+        "prettier": "^3.2.5",
+        "glob": "^10.3.10"
     }
 }
