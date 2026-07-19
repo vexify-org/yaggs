@@ -1,73 +1,124 @@
-# TSDK-CLI
+# @vexify-org/yaggs
 
-TypeScript Development Kit CLI - 直接运行 TypeScript。
+A powerful CLI argument parser for Node.js, designed as a modern alternative to yargs.
 
-## 功能
+## Features
 
-- 直接运行 `.ts` 文件（无需手动编译）
-- Watch 模式（文件变更自动重跑）
-- REPL 交互环境
-- 项目初始化
-- 打包构建
-- 代码格式化
-- 测试运行器
+- Deprecation warnings for deprecated options
+- Subcommand aliases
+- Extended type validators (email, URL, UUID, etc.)
+- Default value merge
+- Conflict detection
+- Exclusive groups
+- Interactive prompts
+- Zero dependencies
 
-## 安装
-
-```bash
-npm install tsdk-cli -g
-```
-
-## 使用
-
-### 运行 TypeScript
+## Installation
 
 ```bash
-tsdk run script.ts
+npm install @vexify-org/yaggs
 ```
 
-### Watch 模式
+## Usage
 
-```bash
-tsdk watch script.ts
+### Basic Example
+
+```javascript
+const yaggs = require('@vexify-org/yaggs');
+
+const argv = yaggs
+    .option('name', {
+        alias: 'n',
+        type: 'string',
+        description: 'Your name',
+        default: 'World'
+    })
+    .option('count', {
+        alias: 'c',
+        type: 'number',
+        description: 'Number of times to greet',
+        default: 1
+    })
+    .argv;
+
+console.log(`Hello, ${argv.name}!`.repeat(argv.count));
 ```
 
-### REPL
+### Commands
 
-```bash
-tsdk repl
+```javascript
+yaggs
+    .command('start [room]', 'Start MineP2P client', (yargs) => {
+        yargs.option('room', {
+            type: 'string',
+            description: 'Room ID to join'
+        });
+    }, (argv) => {
+        console.log('Starting...', argv.room);
+    })
+    .command('stop', 'Stop MineP2P client', () => {
+        console.log('Stopping...');
+    })
+    .argv;
 ```
 
-### 项目初始化
+### Type Validators
 
-```bash
-tsdk init my-project
+```javascript
+yaggs
+    .option('email', {
+        type: 'email',
+        description: 'Email address'
+    })
+    .option('url', {
+        type: 'url',
+        description: 'Website URL'
+    })
+    .option('uuid', {
+        type: 'uuid',
+        description: 'UUID'
+    })
+    .argv;
 ```
 
-### 打包
+### Deprecation Warnings
 
-```bash
-tsdk bundle src/index.ts --outfile=dist/bundle.js
+```javascript
+yaggs
+    .option('old-flag', {
+        type: 'boolean',
+        deprecated: true,
+        deprecatedMessage: 'Use --new-flag instead'
+    })
+    .argv;
 ```
 
-### 格式化
+### Exclusive Groups
 
-```bash
-tsdk format src/
+```javascript
+yaggs
+    .option('json', {
+        type: 'boolean',
+        conflicts: 'yaml'
+    })
+    .option('yaml', {
+        type: 'boolean',
+        conflicts: 'json'
+    })
+    .argv;
 ```
 
-### 测试
+## API
 
-```bash
-tsdk test
-```
+- `yaggs.option(name, options)` - Define an option
+- `yaggs.command(cmd, desc, builder, handler)` - Define a command
+- `yaggs.parse(args)` - Parse arguments
+- `yaggs.argv` - Get parsed arguments
 
-## 依赖
+## Compatibility
 
-- esbuild - 快速打包
-- chokidar - 文件监听
-- prettier - 代码格式化
-- glob - 文件匹配
+- Node.js >= 14.0.0
+- Drop-in replacement for yargs in most cases
 
 ## License
 
